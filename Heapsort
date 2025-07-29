@@ -1,0 +1,47 @@
+class vcarb{
+    public static void heapify(int a[], int n, int i)
+    {
+        int largest=i;
+        int left=2*i+1;
+        int right=2*i+2;
+        if( left<n && a[largest]<a[left] && left<n)
+        {
+            largest=left;
+        }
+        if( right<n && a[largest]<a[right] && right<n)
+        {
+            largest=right;
+        }
+        if(largest!=i)
+        {
+            int swap=a[i];
+            a[i]=a[largest];
+            a[largest]=swap;
+            heapify(a, n, largest);
+        }
+    }
+    public static void sort(int a[])
+    {
+        int n=a.length;
+        for(int i=n/2-1;i>=0;i--)
+        {
+            heapify(a, n, i);
+        }
+        for(int i=n-1;i>0;i--)
+        {
+            int temp=a[0];
+            a[0]=a[i];
+            a[i]=temp;
+            heapify(a, i,0);
+        }
+    }
+    public static void main(String[] args) {
+        int a[]={10,23,4,3,2,1,-1,0,43,32,30,100,50,33,1000,99};
+        sort(a);
+        for(int i:a)
+        {
+            System.out.println(i);
+        }
+
+    }
+}
